@@ -9,6 +9,9 @@
 #include "utilities.hpp"
 #include <fstream>
 
+const string DatabasePath = "/Users/LawrenceLuo/Documents/reco-project/Database.csv";
+
+
 
 //GetSOI returns an SOI with info loaded if it already exists, and returns a new SOI with first and last name if doesn't already exist
 SOI GetSOI(string firstName, string lastName) //this needs to be changed. Right now it's a while loop, but that's O(n). we should use a hashtable to automatic line # lookup.
@@ -26,7 +29,7 @@ SOI GetSOI(string firstName, string lastName) //this needs to be changed. Right 
     
     //Open the database file
     fstream fs;
-    fs.open ("/Users/LawrenceLuo/Documents/Reco Project/Reco/Reco/Database.csv");
+    fs.open (DatabasePath);
     if (!fs)
     {
         cerr << "ERROR: Unable to open file Database.csv\n";
@@ -85,7 +88,7 @@ bool exists(string firstName, string lastName)
 
     //Open the database file
     fstream fs;
-    fs.open ("/Users/LawrenceLuo/Documents/Reco Project/Reco/Reco/Database.csv");
+    fs.open (DatabasePath);
     if (!fs)
     {
         cerr << "ERROR: Unable to open file Database.csv\n";
@@ -123,7 +126,7 @@ void updateDatabase(SOI soi)
     
     //Open the database file
     fstream fs;
-    fs.open ("/Users/LawrenceLuo/Documents/Reco Project/Reco/Reco/Database.csv");
+    fs.open (DatabasePath);
     if (!fs)
     {
         cerr << "ERROR: Unable to open file Database.csv\n";
@@ -153,5 +156,17 @@ void updateDatabase(SOI soi)
         fs.close();
 
     }
-    else fs.close();
+    else
+    {
+        /////structural dummy
+        cout << "(dummy utilities) storing SOI data for " << soi.firstName << " " << soi.lastName << " in database\n";
+        
+        //write the info on a new line
+        //close the file stream and open it in append mode
+        fs.close();
+        fs.open(DatabasePath, ios::app);
+        
+        fs << soi.returnInfo();
+        fs.close();
+    }
 }

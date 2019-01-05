@@ -19,4 +19,7 @@ bool exists(string firstName, string lastName);
 
 void updateDatabase(SOI soi);
 
+extern const string DatabasePath;
+
+
 #endif /* utilities_hpp */

@@ -49,7 +49,7 @@ int main(int argc, const char * argv[]) {
                 
                 //Open the database file
                 fstream fs;
-                fs.open ("/Users/LawrenceLuo/Documents/Reco Project/Reco/Reco/Database.csv");
+                fs.open (DatabasePath);
                 if (!fs)
                 {
                     cerr << "ERROR: Unable to open file Database.csv\n";
